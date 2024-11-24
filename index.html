@@ -43,12 +43,56 @@
           <p class="hero-subheading">A place to share and cherish memories</p>
         </div>
       </section>
-      <!-- Add more sections here -->
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <div class="container">
         <span>&copy; 2023 KYE. All rights reserved.</span>
       </div>
     </footer>
+
+    <!-- Modal for full-screen image/video -->
+    <div id="imageModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content-container">
+        <img class="modal-content" id="modalImage">
+        <video class="modal-content" id="modalVideo" controls></video>
+      </div>
+    </div>
+
+    <script>
+      function openModal(element, videoSrc = null) {
+        const modalImage = document.getElementById("modalImage");
+        const modalVideo = document.getElementById("modalVideo");
+        const modalContainer = document.querySelector(".modal-content-container");
+        if (videoSrc) {
+          modalVideo.src = videoSrc;
+          modalVideo.style.display = "block";
+          modalImage.style.display = "none";
+          modalVideo.onloadedmetadata = function() {
+            modalContainer.style.width = modalVideo.videoWidth + 'px';
+            modalContainer.style.height = modalVideo.videoHeight + 'px';
+            modalVideo.play(); // Play the video when the modal is opened
+          };
+        } else {
+          modalImage.src = element.src;
+          modalImage.style.display = "block";
+          modalVideo.style.display = "none";
+          modalContainer.style.width = modalImage.naturalWidth + 'px';
+          modalContainer.style.height = modalImage.naturalHeight + 'px';
+        }
+        document.getElementById("imageModal").classList.add('open');
+        document.getElementById("imageModal").style.display = "block";
+      }
+
+      function closeModal() {
+        const modalVideo = document.getElementById("modalVideo");
+        modalVideo.pause(); // Pause the video when closing the modal
+        modalVideo.currentTime = 0; // Reset the video time in the modal
+        document.getElementById("imageModal").classList.remove('open');
+        document.getElementById("imageModal").style.display = "none";
+      }
+    </script>
   </body>
 </html>

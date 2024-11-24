@@ -52,13 +52,19 @@
                 src="resources/ef8889ce-d205-4426-98e8-5a1eae18c96f-1100w.jpg"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">
                 This image is Kye in a store, although I was not around during this time, it's a reminder of the first image I was sent of her, and the beginning of me finally realizing what I have gotten into - date unknown.
               </p>
             </div>
             <div class="gallery-item">
-              <video controls="controls" src="resources/candycane.mp4" class="gallery-video"></video>
+              <img
+                src="resources/candycane-thumbnail.jpg"
+                alt="video thumbnail"
+                class="gallery-image"
+                onclick="openModal(this, 'resources/candycane.mp4')"
+              />
               <p class="gallery-description">
                 This video may just look like me making fun of Kye, but I actually find it cute watching her do it. She looks so shy and happy at the same time, which honestly gets me in a happy mood. It also symbolizes the beginning of our journey because it is the first video I feel super massive value of and it is clearly around Christmas - 12-23.
               </p>
@@ -68,6 +74,7 @@
                 src="resources/rn_image_picker_lib_temp_406382b3-053d-4907-938c-23d41fe198e0-1100w.jpg"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">
                 This image, what can I even say, Kye just looks absolutely stunning in this image. That dress goes well on her, the slight smile is cute, I just can't say anything else but that it is absolutely stunning.
@@ -78,6 +85,7 @@
                 src="resources/10ce7a99-1454-4ef0-bc24-ea0d7dabc4c8-1100w.jpg"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">This is a funny because cat.</p>
             </div>
@@ -96,5 +104,48 @@
         <span>&copy; 2023 KYE. All rights reserved.</span>
       </div>
     </footer>
+
+    <!-- Modal for full-screen image/video -->
+    <div id="imageModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content-container">
+        <img class="modal-content" id="modalImage">
+        <video class="modal-content" id="modalVideo" controls></video>
+      </div>
+    </div>
+
+    <script>
+      function openModal(element, videoSrc = null) {
+        const modalImage = document.getElementById("modalImage");
+        const modalVideo = document.getElementById("modalVideo");
+        const modalContainer = document.querySelector(".modal-content-container");
+        if (videoSrc) {
+          modalVideo.src = videoSrc;
+          modalVideo.style.display = "block";
+          modalImage.style.display = "none";
+          modalVideo.onloadedmetadata = function() {
+            modalContainer.style.width = modalVideo.videoWidth + 'px';
+            modalContainer.style.height = modalVideo.videoHeight + 'px';
+            modalVideo.play(); // Play the video when the modal is opened
+          };
+        } else {
+          modalImage.src = element.src;
+          modalImage.style.display = "block";
+          modalVideo.style.display = "none";
+          modalContainer.style.width = modalImage.naturalWidth + 'px';
+          modalContainer.style.height = modalImage.naturalHeight + 'px';
+        }
+        document.getElementById("imageModal").classList.add('open');
+        document.getElementById("imageModal").style.display = "block";
+      }
+
+      function closeModal() {
+        const modalVideo = document.getElementById("modalVideo");
+        modalVideo.pause(); // Pause the video when closing the modal
+        modalVideo.currentTime = 0; // Reset the video time in the modal
+        document.getElementById("imageModal").classList.remove('open');
+        document.getElementById("imageModal").style.display = "none";
+      }
+    </script>
   </body>
 </html>

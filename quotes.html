@@ -52,6 +52,7 @@
                 src="resources/screenshot%202023-12-25%201.34.48%20am-1400h.png"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">
                 This image is a symbol of the beginning of this journey, when we both confessed we liked each other. This exact moment is what has caused both of us a massive happy change that at least to me, has changed me as a person for the better. I started wanting to change, Kye makes me feel safe, someone I trust to guide me down the right path.
@@ -62,6 +63,7 @@
                 src="resources/Glue.png"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">
                 This image may not be a massive change in our relationship, but it was a moment that made me laugh, reminded me of the funny person I got into originally.
@@ -72,6 +74,7 @@
                 src="resources/kyeSleepInCall.png"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">
                 This image shows Kye sleeping in a call, a moment that made me feel close and connected to her.
@@ -82,6 +85,7 @@
                 src="resources/suddenDifference.png"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">
                 This image represents a sudden difference in our relationship, a moment of growth and understanding.
@@ -92,6 +96,7 @@
                 src="resources/voice.png"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">
                 This image captures a moment of Kye's voice, a sound that brings me comfort and joy.
@@ -102,6 +107,7 @@
                 src="resources/worryfree.png"
                 alt="image"
                 class="gallery-image"
+                onclick="openModal(this)"
               />
               <p class="gallery-description">
                 This image symbolizes a worry-free moment, a time when everything felt perfect and right.
@@ -122,5 +128,48 @@
         <span>&copy; 2023 KYE. All rights reserved.</span>
       </div>
     </footer>
+
+    <!-- Modal for full-screen image/video -->
+    <div id="imageModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-content-container">
+        <img class="modal-content" id="modalImage">
+        <video class="modal-content" id="modalVideo" controls></video>
+      </div>
+    </div>
+
+    <script>
+      function openModal(element, videoSrc = null) {
+        const modalImage = document.getElementById("modalImage");
+        const modalVideo = document.getElementById("modalVideo");
+        const modalContainer = document.querySelector(".modal-content-container");
+        if (videoSrc) {
+          modalVideo.src = videoSrc;
+          modalVideo.style.display = "block";
+          modalImage.style.display = "none";
+          modalVideo.onloadedmetadata = function() {
+            modalContainer.style.width = modalVideo.videoWidth + 'px';
+            modalContainer.style.height = modalVideo.videoHeight + 'px';
+            modalVideo.play(); // Play the video when the modal is opened
+          };
+        } else {
+          modalImage.src = element.src;
+          modalImage.style.display = "block";
+          modalVideo.style.display = "none";
+          modalContainer.style.width = modalImage.naturalWidth + 'px';
+          modalContainer.style.height = modalImage.naturalHeight + 'px';
+        }
+        document.getElementById("imageModal").classList.add('open');
+        document.getElementById("imageModal").style.display = "block";
+      }
+
+      function closeModal() {
+        const modalVideo = document.getElementById("modalVideo");
+        modalVideo.pause(); // Pause the video when closing the modal
+        modalVideo.currentTime = 0; // Reset the video time in the modal
+        document.getElementById("imageModal").classList.remove('open');
+        document.getElementById("imageModal").style.display = "none";
+      }
+    </script>
   </body>
 </html>
