@@ -88,6 +88,31 @@ main {
   font-size: 1.25rem;
 }
 
+.details {
+  background-color: var(--dl-color-secondary);
+  backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--glass-border-radius);
+  border: var(--glass-border);
+  color: var(--dl-color-gray-black);
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.details-heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.details-subheading {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.details-image {
+  width: 100%;
+  border-radius: var(--glass-border-radius);
+}
+
 .gallery {
   background-color: var(--dl-color-secondary);
   backdrop-filter: blur(var(--glass-blur));
