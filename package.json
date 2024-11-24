@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "kye",
+=======
+  "name": "somber-fatherly-skunk",
+>>>>>>> 862bc18bb46ac36695e579babe0c6837a0f5321d
   "version": "1.0.0",
   "private": true,
   "dependencies": {
